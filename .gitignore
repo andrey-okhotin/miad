@@ -1,0 +1,6 @@
+.ipynb_checkpoints
+__pycache__
+sbatch
+slurm-output
+notebooks
+datasets
