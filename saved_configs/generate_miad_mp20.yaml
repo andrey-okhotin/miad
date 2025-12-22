@@ -1,0 +1,34 @@
+data:
+  batch_size: 2500
+  crystal_preprocess:
+    niggli: true
+    primitive: true
+  main_part: train
+  name: MP-20
+  parts:
+  - train
+  - val
+  - test
+  properties: []
+  type: CrystalDataStorage
+diffusion:
+  cont_time: false
+  frac_diffusion:
+    method: wrapped_normal
+    scheduler: default_wrapped_normal
+  lat_diffusion:
+    method: ddpm
+    scheduler: diffcsp_cosine
+  method: DiffCSP
+  num_steps: 1000
+  task: gen_mp20
+  type_diffusion:
+    method: d3pm
+    scheduler: default_d3pm
+model:
+  saved_model: miad_mp20_epoch8000.pt
+modifications: miad:add_mirage_atoms_upto25
+name: generate_miad_mp20
+num_samples: 10000
+pipeline: ab_initio_generation
+seed: 12345

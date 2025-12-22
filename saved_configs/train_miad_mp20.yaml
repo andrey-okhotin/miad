@@ -1,0 +1,46 @@
+checkpoints:
+  path: train_miad_mp20
+  remove_previous: true
+  saving_freq: 1000
+data:
+  batch_size: 256
+  crystal_preprocess:
+    niggli: true
+    primitive: true
+  main_part: train
+  name: MP-20
+  parts:
+  - train
+  - val
+  - test
+  properties: []
+  type: CrystalDataStorage
+diffusion:
+  cont_time: false
+  frac_diffusion:
+    method: wrapped_normal
+    scheduler: default_wrapped_normal
+  lat_diffusion:
+    method: ddpm
+    scheduler: diffcsp_cosine
+  method: DiffCSP
+  num_steps: 1000
+  task: gen_mp20
+  type_diffusion:
+    method: d3pm
+    scheduler: default_d3pm
+eval_freq: 1000
+model:
+  default_config: cspnet-gen-default
+  model_name: CSPNet
+modifications: miad:add_mirage_atoms_upto25
+n_epochs: 8000
+name: train_miad_mp20
+optimization:
+  optimizer:
+    config:
+      lr: 0.001
+    method: Adam
+  schedulers: []
+pipeline: train_diffusion
+seed: 12345

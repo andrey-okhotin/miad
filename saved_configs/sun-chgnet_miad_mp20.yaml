@@ -1,0 +1,19 @@
+energy_above_hull:
+  energy_hull: 2023-02-07-ppd-mp.pkl
+input: generate_miad_mp20/generated_crystals_cif
+modifications: ''
+name: sun-chgnet_miad_mp20
+novelty:
+  attempt_supercell: false
+  reference: MP-20
+  symmetric: false
+num_crystals: 10000
+pipeline: sun
+prerelaxation:
+  method: CHGNet
+  num_workers: auto
+  steps: 1500
+seed: 12345
+uniqueness:
+  attempt_supercell: false
+  symmetric: false
