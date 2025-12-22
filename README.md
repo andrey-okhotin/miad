@@ -71,7 +71,7 @@ __S.U.N. (eq-V2): 5.64%__
 
 ### Citation
 ```
-@article{okhotin2024miad,
+@article{okhotin2025miad,
   title={MiAD: Mirage Atom Diffusion for De Novo Crystal Generation},
   author={Andrey Okhotin, Maksim Nakhodnov, Nikita Kazeev, Andrey E Ustyuzhanin, Dmitry Vetrov},
   journal={arXiv preprint arXiv:2511.14426},
