@@ -16,8 +16,10 @@ The code in this repo mostly reimplement original DiffCSP. Parts of code, where 
 conda env create -f env/environment.yml
 conda activate miad
 pip install -r env/requirements.txt --no-dependencies
-pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 --index-url https://download.pytorch.org/whl/cu121
-pip install torch-scatter -f https://data.pyg.org/whl/torch-2.4.1+cu121.html -U
+pip install --index-url https://download.pytorch.org/whl/cu121 \
+  --extra-index-url https://pypi.org/simple \
+  "torch==2.4.1+cu121" "torchvision==0.19.1+cu121" "torchaudio==2.4.1+cu121"
+pip install -f https://data.pyg.org/whl/torch-2.4.1+cu121.html torch-scatter -U --force
 ```
 
 ### Downloading datasets
