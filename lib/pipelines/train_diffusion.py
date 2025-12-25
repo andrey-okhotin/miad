@@ -64,7 +64,7 @@ def run(process, config, logger):
     
     # main loop
     
-    for epoch in range(start_epoch, config.n_epochs):
+    for epoch in range(start_epoch, config.n_epochs+1):
 
         # train stage
             

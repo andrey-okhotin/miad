@@ -64,9 +64,9 @@ python lib/run.py -gpu 0_1 -ignore_warnings 1 -config sun-eqv2_miad_mp20.yaml
 ### Expected results
 After execution of all scripts in their original form, an expected results are quite near to the results from the paper: 
 
-__S.U.N. (CHGNet): 12.21%__
+- __S.U.N. (CHGNet): 12.21%__
 
-__S.U.N. (eq-V2): 5.64%__
+- __S.U.N. (eq-V2): 5.64%__
 
 
 ### Citation
