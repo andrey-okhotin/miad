@@ -23,6 +23,9 @@ def uniqueness(
             "ut_path\' need to be specified in the config."
         )
 
+    # to decrease number of StructureMatcher calls
+    get_hash = lambda structure: str(sorted(list(structure.atomic_numbers)))
+
     present = defaultdict(list)
     uniqueness = []
     for i in range(len(structures['structure'])):
@@ -31,18 +34,18 @@ def uniqueness(
             continue
         structure = structures['structure'][i]
 
-        chem_system = frozenset(structure.composition)
-        if chem_system not in present:
+        structure_hash = get_hash(structure)
+        if structure_hash not in present:
             uniqueness.append(True)
         else:
-            for present_structure in present[chem_system]:
+            for present_structure in present[structure_hash]:
                 if StructureMatcher(attempt_supercell=config.attempt_supercell).fit(
                     structure, present_structure, symmetric=config.symmetric):
                     uniqueness.append(False)
                     break
             else:
                 uniqueness.append(True)
-        present[chem_system].append(structure)
+        present[structure_hash].append(structure)
     structures['uniqueness'] = uniqueness
 
     if save_report:

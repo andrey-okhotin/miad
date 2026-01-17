@@ -26,6 +26,9 @@ def novelty(
             "ut_path\' need to be specified in the config."
         )
     
+    # to decrease number of StructureMatcher calls
+    get_hash = lambda structure: str(sorted(list(structure.atomic_numbers)))
+
     # preprocess reference
     path_to_reference_folder = os.path.join(get_repo_root(), 'datasets', config.reference)
     path_to_reference = os.path.join(path_to_reference_folder, 'novelty_reference.pt')
@@ -35,8 +38,8 @@ def novelty(
         train_structures = dataset['cif'].apply(Structure.from_str, fmt="cif")
         reference = defaultdict(list)
         for structure in train_structures:
-            chem_system = str(sorted(list(structure.atomic_numbers)))
-            reference[chem_system].append(structure)
+            structure_hash = get_hash(structure)
+            reference[structure_hash].append(structure)
         torch.save(reference, path_to_reference)
     else:
         reference = torch.load(path_to_reference)
@@ -44,15 +47,15 @@ def novelty(
     novelty = []
     for i in range(len(structures['structure'])):
         if not structures['valid']:
-            uniqueness.append(False)
+            novelty.append(False)
             continue
         structure = structures['structure'][i]
 
-        chem_system = frozenset(structure.composition)
-        if chem_system not in reference:
+        structure_hash = get_hash(structure)
+        if structure_hash not in reference:
             novelty.append(True)
         else:
-            for reference_structure in reference[chem_system]:
+            for reference_structure in reference[structure_hash]:
                 if StructureMatcher(attempt_supercell=config.attempt_supercell).fit(
                     structure, reference_structure, symmetric=config.symmetric):                
                     novelty.append(False)
